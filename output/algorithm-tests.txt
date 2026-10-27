@@ -1,0 +1,1 @@
+All algorithm checks passed: singleton, 100 mazes, 200 slide graphs, million-cell DFS, deep SCC.

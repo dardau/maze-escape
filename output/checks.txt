@@ -1,0 +1,28 @@
+Compiles.
+
+Mission 0, DisjointSetTest:
+  ok    6 sets at the start
+  ok    0 and 1 are apart at the start
+  ok    union(0, 1) joins two sets
+  ok    0 and 1 are together
+  ok    union(1, 0) again returns false
+  ok    5 sets after one union
+  ok    0 and 2 are together through 1 and 3
+  ok    3 sets: {0,1,2,3} {4} {5}
+  ok    a single cell is its own root
+  ok    self union changes nothing
+  ok    self union preserves count
+  ok    large chain has one set
+  ok    large chain endpoints are connected
+  ok    closing a cycle does not merge sets
+  ok    repeated finds agree
+  ok    empty DSU has no sets
+  ok    one-element DSU
+  All checks passed.
+
+Examples:
+  tiny: all 13 lines are right
+  small: all 13 lines are right
+  dag: all 13 lines are right
+
+All examples pass. Now run it on your own data: java -cp out Main
