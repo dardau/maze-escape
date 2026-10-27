@@ -51,9 +51,9 @@ Fastest route cost: 7
 
 `find(x)` returns the representative of the group containing cell x. `union(a,b)` joins two different groups and returns true, or returns false if they already have the same representative. Union by size puts the smaller tree under the larger one, and path compression makes every node visited by find point directly to its root; together they give amortized O(alpha(n)) operations.
 
-### Mission 1. Why is Broken R*C - 1, and Kept (R-1)*(C-1)?
+### Mission 1. Why is Broken `R*C - 1`, and Kept `(R-1)*(C-1)`?
 
-Initially there are R*C separate components, and each broken wall reduces their count by exactly one without creating a cycle. The complete rectangular grid is connected, so exactly R*C - 1 walls must be broken to leave one component. There are R*(C-1) + C*(R-1) inner walls in total; subtracting R*C - 1 leaves R*C - R - C + 1 = (R-1)*(C-1).
+Initially there are `R*C` separate components, and each broken wall reduces their count by exactly one without creating a cycle. The complete rectangular grid is connected, so exactly `R*C - 1` walls must be broken to leave one component. There are `R*(C-1) + C*(R-1)` inner walls in total; subtracting `R*C - 1` leaves `R*C - R - C + 1 = (R-1)*(C-1)`.
 
 ### Mission 2. MST costs from Kruskal and Prim, and why they are equal
 
