@@ -76,7 +76,31 @@ public class Zones {
      * [1] the cost of the cheapest route from the zone of cell 0 to the zone of the last cell.
      */
     public static long[] routes(Input.Slides s, int[] zoneOf, int zoneCount) {
-        // TODO
-        return new long[]{0, 0};
+        if (zoneCount == 0) return new long[]{0, 0};
+        // Merge parallel slides: only the cheapest slide between two zones matters.
+        java.util.List<Map<Integer, Integer>> graph = new java.util.ArrayList<>(zoneCount);
+        for (int z = 0; z < zoneCount; z++) graph.add(new HashMap<>());
+        for (int i = 0; i < s.count(); i++) {
+            int from = zoneOf[s.from()[i]], to = zoneOf[s.to()[i]];
+            if (from != to) graph.get(from).merge(to, s.time()[i], Math::min);
+        }
+        long[] distance = new long[zoneCount];
+        Arrays.fill(distance, Long.MAX_VALUE);
+        distance[zoneOf[0]] = 0;
+        int[] stages = new int[zoneCount];
+        Arrays.fill(stages, 1); // A chain may start in any zone, including an isolated one.
+        int longest = 1;
+        for (int from = 0; from < zoneCount; from++) {
+            longest = Math.max(longest, stages[from]);
+            for (Map.Entry<Integer, Integer> edge : graph.get(from).entrySet()) {
+                int to = edge.getKey();
+                if (to <= from) throw new IllegalArgumentException("Zones must be in topological order");
+                stages[to] = Math.max(stages[to], stages[from] + 1);
+                if (distance[from] != Long.MAX_VALUE) {
+                    distance[to] = Math.min(distance[to], distance[from] + edge.getValue());
+                }
+            }
+        }
+        return new long[]{longest, distance[zoneOf[s.n() - 1]]};
     }
 }
